@@ -1,0 +1,23 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Server Components fetch the backend directly at this URL
+        # (both at build time for prerendering and at runtime for SSR).
+        BACKEND_URL: http://backend:4000
+    ports:
+      - "3000:3000"
+    environment:
+      - BACKEND_URL=http://backend:4000
+    depends_on:
+      - backend
+    restart: unless-stopped
