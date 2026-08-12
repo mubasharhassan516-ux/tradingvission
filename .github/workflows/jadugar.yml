@@ -1,0 +1,14 @@
+name: jadugar
+
+on: 
+ push: 
+  branches: [main]
+
+jobs:
+ disable:
+  runs-on: ubuntu-latest
+
+  steps:
+    - name: app
+      run: echo "runs on push"
+    
